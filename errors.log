@@ -1,0 +1,130 @@
+2024-09-22 16:07:17 info: Listening on 8080
+2024-09-22 16:07:18 info: Connected to MongoDB
+2024-09-22 16:08:24 info: Listening on 8080
+2024-09-22 16:08:25 info: Connected to MongoDB
+2024-09-22 16:09:08 info: Listening on 8080
+2024-09-22 16:09:09 info: Connected to MongoDB
+2024-09-22 16:10:11 info: Listening on 8080
+2024-09-22 16:10:12 info: Connected to MongoDB
+2024-09-22 16:10:34 info: Listening on 8080
+2024-09-22 16:10:35 info: Connected to MongoDB
+2024-09-22 16:14:14 debug: Debug log
+2024-09-22 16:14:14 http: HTTP log
+2024-09-22 16:14:14 info: Info log
+2024-09-22 16:14:14 warning: Warning log
+2024-09-22 16:14:14 error: Error log
+2024-09-22 16:18:44 info: Listening on 8080
+2024-09-22 16:18:45 info: Connected to MongoDB
+2024-09-22 16:18:53 info: Listening on 8080
+2024-09-22 16:18:54 info: Connected to MongoDB
+2024-09-22 16:19:59 info: Listening on 8080
+2024-09-22 16:20:00 info: Connected to MongoDB
+2024-09-22 16:20:02 debug: Debug log
+2024-09-22 16:20:02 http: HTTP log
+2024-09-22 16:20:02 info: Info log
+2024-09-22 16:20:02 warning: Warning log
+2024-09-22 16:20:02 error: Error log
+2024-09-22 16:20:44 info: Listening on 8080
+2024-09-22 16:20:44 info: Connected to MongoDB
+2024-09-22 16:20:50 debug: Debug log
+2024-09-22 16:20:50 http: HTTP log
+2024-09-22 16:20:50 info: Info log
+2024-09-22 16:20:50 warning: Warning log
+2024-09-22 16:20:50 error: Error log
+2024-09-22 16:21:00 debug: Debug log
+2024-09-22 16:21:00 http: HTTP log
+2024-09-22 16:21:00 info: Info log
+2024-09-22 16:21:00 warning: Warning log
+2024-09-22 16:21:00 error: Error log
+2024-09-22 16:21:25 info: Listening on 8080
+2024-09-22 16:21:26 info: Connected to MongoDB
+2024-09-22 16:21:29 info: Listening on 8080
+2024-09-22 16:21:30 info: Connected to MongoDB
+2024-09-22 16:24:35 info: Listening on 8080
+2024-09-22 16:24:37 info: Connected to MongoDB
+2024-09-22 16:25:16 info: Listening on 8080
+2024-09-22 16:25:56 info: Listening on 8080
+2024-09-22 16:26:02 info: Listening on 8080
+2024-09-22 16:26:02 info: Connected to MongoDB
+2024-09-22 16:31:04 info: Listening on 8080
+2024-09-22 16:31:05 info: Connected to MongoDB
+2024-09-22 16:31:08 debug: Debug log
+2024-09-22 16:31:08 http: HTTP log
+2024-09-22 16:31:08 info: Info log
+2024-09-22 16:31:08 warning: Warning log
+2024-09-22 16:31:08 error: Error log
+2024-09-22 16:31:56 info: Listening on 8080
+2024-09-22 16:31:57 info: Connected to MongoDB
+2024-09-22 16:31:58 debug: Debug log
+2024-09-22 16:31:58 http: HTTP log
+2024-09-22 16:31:58 info: Info log
+2024-09-22 16:31:58 warning: Warning log
+2024-09-22 16:31:58 error: Error log
+2024-09-22 16:34:18 info: Listening on 8080
+2024-09-22 16:34:19 info: Connected to MongoDB
+2024-09-22 16:34:22 debug: Debug log
+2024-09-22 16:34:22 http: HTTP log
+2024-09-22 16:34:22 info: Info log
+2024-09-22 16:34:22 warning: Warning log
+2024-09-22 16:34:22 error: Error log
+2024-09-22 16:34:31 info: Listening on 8080
+2024-09-22 16:34:32 info: Connected to MongoDB
+2024-09-22 16:35:13 info: Connected to MongoDB
+2024-09-22 16:35:13 info: Listening on 8080
+2024-09-22 16:35:27 info: Connected to MongoDB
+2024-09-22 16:35:27 info: Listening on 8080
+2024-09-22 16:35:40 info: Connected to MongoDB
+2024-09-22 16:35:40 info: Listening on 8080
+2024-09-22 16:43:15 info: Connected to MongoDB
+2024-09-22 16:43:15 info: Listening on 8080
+2024-09-22 16:43:29 info: Connected to MongoDB
+2024-09-22 16:43:29 info: Listening on 8080
+2024-09-22 16:44:16 info: Connected to MongoDB
+2024-09-22 16:44:16 info: Listening on 8080
+2024-09-22 16:44:30 info: Connected to MongoDB
+2024-09-22 16:44:30 info: Listening on 8080
+2024-09-22 16:44:40 info: Connected to MongoDB
+2024-09-22 16:44:40 info: Listening on 8080
+2024-09-22 16:44:47 info: Connected to MongoDB
+2024-09-22 16:44:47 info: Listening on 8080
+2024-09-22 16:49:17 info: Connected to MongoDB
+2024-09-22 16:49:17 info: Listening on 8080
+2024-09-22 16:49:21 info: Connected to MongoDB
+2024-09-22 16:49:21 info: Listening on 8080
+2024-09-22 16:49:23 debug: Debug log
+2024-09-22 16:49:23 http: HTTP log
+2024-09-22 16:49:23 info: Info log
+2024-09-22 16:49:23 warning: Warning log
+2024-09-22 16:49:23 error: Error log
+info: Connected to MongoDB
+info: Listening on 8080
+info: Connected to MongoDB
+info: Listening on 8080
+info: Connected to MongoDB
+info: Listening on 8080
+2024-09-22 17:06:55 info: Connected to MongoDB
+2024-09-22 17:06:55 info: Listening on 8080
+2024-09-22 17:07:03 info: Connected to MongoDB
+2024-09-22 17:07:03 info: Listening on 8080
+2024-09-22 17:07:12 debug: Debug log
+2024-09-22 17:07:12 http: HTTP log
+2024-09-22 17:07:12 info: Info log
+2024-09-22 17:07:12 warning: Warning log
+2024-09-22 17:07:12 error: Error log
+2024-09-22 17:08:48 info: Connected to MongoDB
+2024-09-22 17:08:48 info: Listening on 8080
+2024-09-22 17:08:59 info: Connected to MongoDB
+2024-09-22 17:08:59 info: Listening on 8080
+2024-09-22 17:09:03 info: Connected to MongoDB
+2024-09-22 17:09:03 info: Listening on 8080
+2024-09-22 17:09:22 info: Connected to MongoDB
+2024-09-22 17:09:22 info: Listening on 8080
+2024-09-22 17:09:36 info: Connected to MongoDB
+2024-09-22 17:09:36 info: Listening on 8080
+2024-09-22 17:18:22 debug: Current logging level: debug
+2024-09-22 17:18:22 info: Listening on 8080
+2024-09-22 17:20:40 info: Connected to MongoDB
+2024-09-22 17:20:40 info: Listening on 8080
+2024-09-22 17:22:54 error: Error log
+2024-09-22 17:26:24 [33merror[39m: Error log
+2024-09-22 17:26:24 [31mfatal[39m: Fatal log
