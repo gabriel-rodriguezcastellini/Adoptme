@@ -26,6 +26,17 @@ const getUser = async (req, res) => {
   }
 };
 
+const createUser = async (req, res) => {
+  try {
+    const user = req.body;
+    const result = await usersService.create(user);
+    res.status(201).send({ status: "success", payload: result });
+  } catch (error) {
+    logger.error(`Error creating user: ${error}`);
+    res.status(500).send({ status: "error", error: "Internal Server Error" });
+  }
+};
+
 const updateUser = async (req, res) => {
   const updateBody = req.body;
   const userId = req.params.uid;
@@ -58,5 +69,6 @@ export default {
   deleteUser,
   getAllUsers,
   getUser,
+  createUser,
   updateUser,
 };

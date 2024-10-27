@@ -10,12 +10,19 @@ import mocksRouter from "./routes/mocks.router.js";
 import logger from "./utils/logger.js";
 import swaggerRouter from "./utils/swagger.js";
 
-dotenv.config();
+dotenv.config({ path: process.env.NODE_ENV === "test" ? ".env.test" : ".env" });
 const app = express();
 const PORT = process.env.PORT || 8080;
+const MONGO_URL =
+  process.env.NODE_ENV === "test"
+    ? process.env.URL_MONGO_TEST
+    : process.env.URL_MONGO;
 
 try {
-  mongoose.connect(process.env.URL_MONGO);
+  mongoose.connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   logger.info("Connected to MongoDB");
 } catch (error) {
   logger.error(`MongoDB connection error: ${error}`);
@@ -42,3 +49,5 @@ app.get("/loggerTest", (_req, res) => {
 });
 
 app.listen(PORT, () => logger.info(`Listening on ${PORT}`));
+
+export default app;

@@ -1,8 +1,5 @@
-import PetDTO from "../dto/Pet.dto.js";
 import { petsService } from "../services/index.js";
 import __dirname from "../utils/index.js";
-import { createError } from "../utils/errorHandler.js";
-import logger from "../utils/logger.js";
 
 const getAllPets = async (_req, res) => {
   const pets = await petsService.getAll();
@@ -10,16 +7,13 @@ const getAllPets = async (_req, res) => {
 };
 
 const createPet = async (req, res) => {
-  const { name, specie, birthDate } = req.body;
-  if (!name || !specie || !birthDate) {
-    const error = createError("INCOMPLETE_VALUES");
-    return res
-      .status(error.status)
-      .send({ status: "error", error: error.message });
+  try {
+    const pet = req.body;
+    const result = await petsService.create(pet);
+    res.status(201).send({ status: "success", payload: result });
+  } catch (error) {
+    res.status(500).send({ status: "error", error: "Internal Server Error" });
   }
-  const pet = PetDTO.getPetInputFrom({ name, specie, birthDate });
-  const result = await petsService.create(pet);
-  res.send({ status: "success", payload: result });
 };
 
 const updatePet = async (req, res) => {
@@ -36,22 +30,25 @@ const deletePet = async (req, res) => {
 };
 
 const createPetWithImage = async (req, res) => {
-  const file = req.file;
-  const { name, specie, birthDate } = req.body;
-  if (!name || !specie || !birthDate)
-    return res
-      .status(400)
-      .send({ status: "error", error: "Incomplete values" });
-  logger.debug(file);
-  const pet = PetDTO.getPetInputFrom({
-    name,
-    specie,
-    birthDate,
-    image: `${__dirname}/../public/img/${file.filename}`,
-  });
-  logger.debug(pet);
-  const result = await petsService.create(pet);
-  res.send({ status: "success", payload: result });
+  try {
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
+    const pet = req.body;
+    const result = await petsService.create(pet);
+    res.status(201).send({ status: "success", payload: result });
+  } catch (error) {
+    res.status(500).send({ status: "error", error: "Internal Server Error" });
+  }
+};
+
+const getPetById = async (req, res) => {
+  const petId = req.params.pid;
+  const pet = await petsService.getBy({ _id: petId });
+  if (!pet) {
+    return res.status(404).send({ status: "error", error: "Pet not found" });
+  }
+  res.send({ status: "success", payload: pet });
 };
 
 export default {
@@ -60,4 +57,5 @@ export default {
   updatePet,
   deletePet,
   createPetWithImage,
+  getPetById,
 };

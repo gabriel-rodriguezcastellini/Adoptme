@@ -14,6 +14,7 @@ router.post(
 );
 router.put("/:pid", petsController.updatePet);
 router.delete("/:pid", petsController.deletePet);
+router.get("/:pid", petsController.getPetById);
 
 router.get("/mockingpets", (_req, res) => {
   const mockPets = generateMockPets(100);

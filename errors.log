@@ -128,3 +128,4 @@ info: Listening on 8080
 2024-09-22 17:22:54 error: Error log
 2024-09-22 17:26:24 [33merror[39m: Error log
 2024-09-22 17:26:24 [31mfatal[39m: Fatal log
+2024-10-29 09:52:54 [33merror[39m: Error creating user: TypeError: usersService.save is not a function
