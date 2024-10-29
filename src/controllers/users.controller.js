@@ -26,17 +26,6 @@ const getUser = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
-  try {
-    const user = req.body;
-    const result = await usersService.create(user);
-    res.status(201).send({ status: "success", payload: result });
-  } catch (error) {
-    logger.error(`Error creating user: ${error}`);
-    res.status(500).send({ status: "error", error: "Internal Server Error" });
-  }
-};
-
 const updateUser = async (req, res) => {
   const updateBody = req.body;
   const userId = req.params.uid;
@@ -65,10 +54,28 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const uploadDocuments = async (req, res) => {
+  const userId = req.params.uid;
+  const user = await usersService.getUserById(userId);
+  if (!user) {
+    return res.status(404).send({ status: "error", error: "User not found" });
+  }
+
+  const documents = req.files.map((file) => ({
+    name: file.originalname,
+    reference: file.path,
+  }));
+
+  user.documents.push(...documents);
+  await usersService.update(user._id, { documents: user.documents });
+
+  res.send({ status: "success", message: "Documents uploaded successfully" });
+};
+
 export default {
   deleteUser,
   getAllUsers,
   getUser,
-  createUser,
   updateUser,
+  uploadDocuments,
 };

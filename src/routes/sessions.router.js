@@ -53,6 +53,18 @@ router.get("/unprotectedLogin", sessionsController.unprotectedLogin);
 
 /**
  * @swagger
+ * /api/sessions/logout:
+ *   post:
+ *     summary: Logout from a session
+ *     tags: [Sessions]
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ */
+router.post("/logout", sessionsController.logout);
+
+/**
+ * @swagger
  * /api/sessions/unprotectedCurrent:
  *   get:
  *     summary: Get unprotected current session

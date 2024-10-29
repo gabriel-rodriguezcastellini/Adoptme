@@ -129,3 +129,9 @@ info: Listening on 8080
 2024-09-22 17:26:24 [33merror[39m: Error log
 2024-09-22 17:26:24 [31mfatal[39m: Fatal log
 2024-10-29 09:52:54 [33merror[39m: Error creating user: TypeError: usersService.save is not a function
+2024-10-29 11:20:18 [33merror[39m: Error creating user: MongoServerError: E11000 duplicate key error collection: test_database.users index: email_1 dup key: { email: "jane.doe@example.com" }
+2024-10-29 11:22:22 [33merror[39m: Error creating user: MongoServerError: E11000 duplicate key error collection: test_database.users index: email_1 dup key: { email: "jane.doe@example.com" }
+2024-10-29 11:27:19 [33merror[39m: Error creating user: MongoServerError: E11000 duplicate key error collection: test_database.users index: email_1 dup key: { email: "jane.doe@example.com" }
+2024-10-29 11:31:23 [33merror[39m: Error creating user: MongoServerError: E11000 duplicate key error collection: test_database.users index: email_1 dup key: { email: "jane.doe@example.com" }
+2024-10-29 11:32:02 [33merror[39m: Error creating user: MongoServerError: E11000 duplicate key error collection: test_database.users index: email_1 dup key: { email: "jane.doe@example.com" }
+2024-10-29 11:32:29 [33merror[39m: Error creating user: MongoServerError: E11000 duplicate key error collection: test_database.users index: email_1 dup key: { email: "jane.doe@example.com" }

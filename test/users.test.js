@@ -15,6 +15,8 @@ before(async () => {
     useUnifiedTopology: true,
   });
 
+  await userModel.deleteMany({});
+
   const user = await userModel.create({
     first_name: "John",
     last_name: "Doe",
@@ -52,26 +54,6 @@ describe("Users API", () => {
         .eql(validUserId.toString());
       done();
     });
-  });
-
-  it("should create a new user", (done) => {
-    const newUser = {
-      first_name: "Jane",
-      last_name: "Doe",
-      email: "jane.doe@example.com",
-      password: process.env.USER_PASSWORD,
-      role: "user",
-    };
-    request
-      .post("/api/users")
-      .send(newUser)
-      .end((_err, res) => {
-        expect(res.status).to.equal(201);
-        expect(res.body).to.be.an("object");
-        expect(res.body.status).to.equal("success");
-        expect(res.body.payload).to.have.property("_id");
-        done();
-      });
   });
 
   it("should update a user by ID", (done) => {
