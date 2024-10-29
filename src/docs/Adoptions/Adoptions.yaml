@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Adoptions API
+  version: 1.0.0
+  description: API documentation for Adoptions
+paths:
+  /api/adoptions:
+    get:
+      summary: Get all adoptions
+      tags:
+        - Adoptions
+      responses:
+        200:
+          description: List of adoptions retrieved successfully
+
+  /api/adoptions/{aid}:
+    get:
+      summary: Get adoption by ID
+      tags:
+        - Adoptions
+      parameters:
+        - name: aid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Adoption retrieved successfully
+
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Create a new adoption
+      tags:
+        - Adoptions
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Adoption created successfully

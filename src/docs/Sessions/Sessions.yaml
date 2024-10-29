@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  title: Sessions API
+  version: 1.0.0
+  description: API documentation for Sessions
+paths:
+  /api/sessions/register:
+    post:
+      summary: Register a new session
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: Jane
+                last_name:
+                  type: string
+                  example: Doe
+                email:
+                  type: string
+                  example: jane.doe@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        200:
+          description: Session registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Session registered successfully
+
+  /api/sessions/login:
+    post:
+      summary: Login to a session
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: jane.doe@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        200:
+          description: Logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Logged in successfully
+
+  /api/sessions/current:
+    get:
+      summary: Get current session
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Current session retrieved successfully
+
+  /api/sessions/unprotectedLogin:
+    get:
+      summary: Unprotected login
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Unprotected login successful
+
+  /api/sessions/logout:
+    post:
+      summary: Logout from a session
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Logged out successfully
+
+  /api/sessions/unprotectedCurrent:
+    get:
+      summary: Get unprotected current session
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Unprotected current session retrieved successfully

@@ -9,6 +9,8 @@ import sessionsRouter from "./routes/sessions.router.js";
 import mocksRouter from "./routes/mocks.router.js";
 import logger from "./utils/logger.js";
 import swaggerRouter from "./utils/swagger.js";
+import swaggerUiExpress from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
 
 dotenv.config({ path: process.env.NODE_ENV === "test" ? ".env.test" : ".env" });
 const app = express();
@@ -36,7 +38,10 @@ app.use("/api/pets", petsRouter);
 app.use("/api/adoptions", adoptionsRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/api/mocks", mocksRouter);
-app.use(swaggerRouter);
+
+const specs = swaggerJSDoc(swaggerRouter);
+
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 app.get("/loggerTest", (_req, res) => {
   logger.debug("Debug log");
