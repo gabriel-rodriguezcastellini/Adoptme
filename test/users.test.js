@@ -3,9 +3,15 @@ import supertest from "supertest";
 import app from "../src/app.js";
 import mongoose from "mongoose";
 import userModel from "../src/dao/models/User.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const { expect } = chai;
 const request = supertest(app);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let validUserId;
 
@@ -31,6 +37,26 @@ after(async () => {
     await mongoose.connection.db.dropDatabase();
     await mongoose.connection.close();
   }
+});
+
+afterEach(() => {
+  const directories = [
+    path.join(__dirname, "../src/public/documents"),
+    path.join(__dirname, "../src/public/img"),
+    path.join(__dirname, "../src/public/others"),
+    path.join(__dirname, "../src/public/pets"),
+  ];
+
+  directories.forEach((directory) => {
+    fs.readdir(directory, (err, files) => {
+      if (err) throw err;
+      for (const file of files) {
+        fs.unlink(path.join(directory, file), (err) => {
+          if (err) throw err;
+        });
+      }
+    });
+  });
 });
 
 describe("Users API", () => {
