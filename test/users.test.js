@@ -82,4 +82,17 @@ describe("Users API", () => {
       done();
     });
   });
+
+  it("should upload documents for a user", (done) => {
+    request
+      .post(`/api/users/${validUserId}/documents`)
+      .attach("documents", "test/fixtures/test.txt")
+      .end((_err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an("object");
+        expect(res.body.status).to.equal("success");
+        expect(res.body.message).to.equal("Documents uploaded successfully");
+        done();
+      });
+  });
 });

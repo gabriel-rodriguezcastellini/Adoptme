@@ -3,48 +3,43 @@ import supertest from "supertest";
 import app from "../src/app.js";
 import mongoose from "mongoose";
 import petModel from "../src/dao/models/Pet.js";
-import path from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
 
 const { expect } = chai;
 const request = supertest(app);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 let validPetId;
-let imagePath;
 
 before(async () => {
   mongoose.connect(process.env.URL_MONGO_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+});
+
+beforeEach(async () => {
+  await petModel.deleteMany({});
 
   const pet = await petModel.create({
-    name: "Test Pet",
+    name: "Buddy",
     specie: "Dog",
-    birthDate: "2020-01-01",
+    age: 2,
+    breed: "Golden Retriever",
+    adopted: false,
   });
-  validPetId = pet._id.toString();
+  validPetId = pet._id;
 });
 
 after(async () => {
   if (mongoose.connection.readyState === 1) {
     await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
-  }
-  if (imagePath) {
-    fs.unlink(imagePath, () => {});
+    await mongoose.disconnect();
   }
 });
 
-describe("Pets API", function () {
-  this.timeout(30000);
-
+describe("Pets API", () => {
   it("should get all pets", (done) => {
     request.get("/api/pets").end((err, res) => {
+      if (err) return done(err);
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an("object");
       expect(res.body.status).to.equal("success");
@@ -55,19 +50,23 @@ describe("Pets API", function () {
 
   it("should get a single pet by ID", (done) => {
     request.get(`/api/pets/${validPetId}`).end((err, res) => {
+      if (err) return done(err);
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an("object");
       expect(res.body.status).to.equal("success");
-      expect(res.body.payload).to.have.property("_id").eql(validPetId);
+      expect(res.body.payload).to.have.property("_id");
+      expect(res.body.payload._id).to.equal(validPetId.toString());
       done();
     });
   });
 
   it("should create a new pet", (done) => {
     const newPet = {
-      name: "Buddy",
-      specie: "Dog",
-      birthDate: "2020-01-01",
+      name: "Max",
+      specie: "Cat",
+      age: 3,
+      breed: "Siamese",
+      adopted: false,
     };
     request
       .post("/api/pets")
@@ -83,27 +82,19 @@ describe("Pets API", function () {
   });
 
   it("should create a new pet with image", (done) => {
-    const newPet = {
-      name: "Buddy",
-      specie: "Dog",
-      birthDate: "2020-01-01",
-    };
     request
       .post("/api/pets/withimage")
-      .field("name", newPet.name)
-      .field("specie", newPet.specie)
-      .field("birthDate", newPet.birthDate)
-      .attach(
-        "image",
-        path.resolve(__dirname, "../src/public/img/1671549990926-coderDog.jpg")
-      )
+      .field("name", "Bella")
+      .field("specie", "Dog")
+      .field("age", 4)
+      .field("breed", "Labrador")
+      .attach("image", "test/fixtures/dog.jpg")
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(201);
         expect(res.body).to.be.an("object");
         expect(res.body.status).to.equal("success");
         expect(res.body.payload).to.have.property("_id");
-        imagePath = res.body.payload.image;
         done();
       });
   });

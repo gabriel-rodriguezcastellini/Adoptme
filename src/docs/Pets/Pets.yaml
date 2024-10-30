@@ -1,8 +1,3 @@
-openapi: 3.0.0
-info:
-  title: Pets API
-  version: 1.0.0
-  description: API documentation for Pets
 paths:
   /api/pets:
     get:
@@ -10,9 +5,14 @@ paths:
       tags:
         - Pets
       responses:
-        200:
-          description: List of pets retrieved successfully
-
+        "200":
+          description: A list of pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
     post:
       summary: Create a new pet
       tags:
@@ -22,34 +22,33 @@ paths:
         content:
           application/json:
             schema:
+              $ref: "#/components/schemas/Pet"
+      responses:
+        "201":
+          description: Pet created successfully
+  /api/pets/withimage:
+    post:
+      summary: Create a new pet with an image
+      tags:
+        - Pets
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
               type: object
               properties:
-                name:
-                  type: string
-                  example: Max
-                specie:
-                  type: string
-                  example: Dog
-                birthDate:
-                  type: string
-                  format: date
-                  example: 2020-01-01
-                adopted:
-                  type: boolean
-                  example: false
-                owner:
-                  type: string
-                  example: 60d0fe4f5311236168a109ca
                 image:
                   type: string
-                  example: /images/max.png
+                  format: binary
+                pet:
+                  $ref: "#/components/schemas/Pet"
       responses:
-        201:
-          description: Pet created successfully
-
+        "201":
+          description: Pet with image created successfully
   /api/pets/{pid}:
     get:
-      summary: Get pet by ID
+      summary: Get a pet by ID
       tags:
         - Pets
       parameters:
@@ -59,9 +58,12 @@ paths:
           schema:
             type: string
       responses:
-        200:
-          description: Pet retrieved successfully
-
+        "200":
+          description: A single pet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pet"
     put:
       summary: Update a pet by ID
       tags:
@@ -77,15 +79,10 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: Max
+              $ref: "#/components/schemas/Pet"
       responses:
-        200:
+        "200":
           description: Pet updated successfully
-
     delete:
       summary: Delete a pet by ID
       tags:
@@ -97,5 +94,35 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        "204":
           description: Pet deleted successfully
+  /api/pets/mockingpets:
+    get:
+      summary: Generate mock pets
+      tags:
+        - Pets
+      responses:
+        "200":
+          description: A list of mock pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+        breed:
+          type: string
+        owner:
+          type: string
+        image:
+          type: string
