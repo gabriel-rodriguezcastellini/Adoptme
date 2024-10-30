@@ -1,24 +1,15 @@
 import chai from "chai";
 import supertest from "supertest";
 import app from "../src/app.js";
-import mongoose from "mongoose";
 import petModel from "../src/dao/models/Pet.js";
+import "./setup.js";
 
 const { expect } = chai;
 const request = supertest(app);
 
 let validPetId;
 
-before(async () => {
-  mongoose.connect(process.env.URL_MONGO_TEST, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-});
-
 beforeEach(async () => {
-  await petModel.deleteMany({});
-
   const pet = await petModel.create({
     name: "Buddy",
     specie: "Dog",
@@ -27,13 +18,6 @@ beforeEach(async () => {
     adopted: false,
   });
   validPetId = pet._id;
-});
-
-after(async () => {
-  if (mongoose.connection.readyState === 1) {
-    await mongoose.connection.db.dropDatabase();
-    await mongoose.disconnect();
-  }
 });
 
 describe("Pets API", () => {

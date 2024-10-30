@@ -1,11 +1,11 @@
 import chai from "chai";
 import supertest from "supertest";
 import app from "../src/app.js";
-import mongoose from "mongoose";
 import userModel from "../src/dao/models/User.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import "./setup.js";
 
 const { expect } = chai;
 const request = supertest(app);
@@ -15,14 +15,7 @@ const __dirname = path.dirname(__filename);
 
 let validUserId;
 
-before(async () => {
-  mongoose.connect(process.env.URL_MONGO_TEST, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-  await userModel.deleteMany({});
-
+beforeEach(async () => {
   const user = await userModel.create({
     first_name: "John",
     last_name: "Doe",
@@ -30,13 +23,6 @@ before(async () => {
     password: process.env.USER_PASSWORD,
   });
   validUserId = user._id;
-});
-
-after(async () => {
-  if (mongoose.connection.readyState === 1) {
-    await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
-  }
 });
 
 afterEach(() => {

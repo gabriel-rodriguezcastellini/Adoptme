@@ -1,29 +1,22 @@
 import chai from "chai";
 import supertest from "supertest";
 import app from "../src/app.js";
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 import userModel from "../src/dao/models/User.js";
+import "./setup.js";
+import bcrypt from "bcrypt";
 
 const { expect } = chai;
 const request = supertest(app);
 
 let authToken;
 
-before(async () => {
-  mongoose.connect(process.env.URL_MONGO_TEST, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+beforeEach(async () => {
+  await userModel.create({
+    first_name: "John",
+    last_name: "Doe",
+    email: "john@example.com",
+    password: bcrypt.hashSync(process.env.USER_PASSWORD, 10),
   });
-
-  await userModel.deleteMany({});
-});
-
-after(async () => {
-  if (mongoose.connection.readyState === 1) {
-    await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
-  }
 });
 
 describe("Sessions API", () => {
@@ -49,7 +42,7 @@ describe("Sessions API", () => {
 
   it("should login to a user session", (done) => {
     const loginUser = {
-      email: "jane.doe@example.com",
+      email: "john@example.com",
       password: process.env.USER_PASSWORD,
     };
     request
@@ -75,14 +68,14 @@ describe("Sessions API", () => {
         expect(res.body).to.be.an("object");
         expect(res.body.status).to.equal("success");
         expect(res.body.payload).to.have.property("email");
-        expect(res.body.payload.email).to.equal("jane.doe@example.com");
+        expect(res.body.payload.email).to.equal("john@example.com");
         done();
       });
   });
 
   it("should perform an unprotected login", (done) => {
     const loginUser = {
-      email: "jane.doe@example.com",
+      email: "john@example.com",
       password: process.env.USER_PASSWORD,
     };
     request
@@ -107,7 +100,7 @@ describe("Sessions API", () => {
         expect(res.body).to.be.an("object");
         expect(res.body.status).to.equal("success");
         expect(res.body.payload).to.have.property("email");
-        expect(res.body.payload.email).to.equal("jane.doe@example.com");
+        expect(res.body.payload.email).to.equal("john@example.com");
         done();
       });
   });
